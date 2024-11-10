@@ -12,6 +12,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.contrib.auth import logout
 # Create your views here.
+
 def Index(request):
     return render(request, 'user/index.html')
 
@@ -27,12 +28,9 @@ def Register(request):
         form = UserRegisterForm()
     return render(request, 'user/register.html', {'form': form, 'title':'register here'})
   
-################ login forms################################################### 
+
 def Login(request):
     if request.method == 'POST':
-  
-        # AuthenticationForm_can_also_be_used__
-  
         username = request.POST.get('username',None)
         password = request.POST.get('password',None)
         print(username,password)
@@ -44,7 +42,7 @@ def Login(request):
             messages.success(request, f' welcome {username} !!')
             return redirect('movies')
         else:
-            messages.info(request, f'account done not exit plz sign in')
+            messages.info(request, f'account does not exit please sign in with valid credentials')
     form = AuthenticationForm()
     return render(request, 'user/login.html', {'form':form, 'title':'log in'})
 

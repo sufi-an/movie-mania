@@ -1,23 +1,28 @@
 {% extends "user/index.html" %}
 {% load crispy_forms_tags %}
 {% block start %}
- 
+  
+{% if user.is_authenticated %}
  <div class="content-section col-md-8 col-md-offset-2">
     <h1>Create a New Movie</h1>
+    <a href="{% url 'movies' %}">Back to Movie List</a>
   <center>
 
-  <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
+  <form method="POST" enctype="multipart/form-data" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
     {% csrf_token %}
     <fieldset class="form-group">
       {{ form|crispy}}
     </fieldset>
    <center>
-    <button style="background: black; font-size: 2rem; padding:1%;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-log-in"></span>   Create</button>
+    <button style=" font-size: 2rem; padding:1%;" class="btn btn-primary" type="submit"><span ></span>   Create</button>
   </center>
   <br/>
   </form>
 </center>
  </div>
+ {% else %}
+ <center> <h1> <strong> Please Log in or Sign Up First </strong></h1> </center>
+{% endif %}
 {% endblock start %}
 
 
